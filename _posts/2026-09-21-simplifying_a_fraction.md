@@ -6,7 +6,7 @@ math: true
 published: true
 ---
 
-# 1. Simplifying a Fraction
+# Simplifying a Fraction
 
 How do we represent a fraction in its simplest form in C++?
 
@@ -32,8 +32,8 @@ $$
 \gcd(a,b)=\gcd(b,a\bmod b)
 $$
 
-The algorithm repeatedly replaces `(a,b)` with `(b,a\bmod b)` until
-`b=0`.
+The algorithm repeatedly replaces `(a, b)` with `(b, a mod b)` until
+`b = 0`.
 
 For example:
 
