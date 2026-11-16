@@ -1,0 +1,51 @@
+*b{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Overpass Mono', monospace;
+  line-height: 130%;
+  color: #333;
+  font-size: 18px;
+  background-color: #eaf4ea;
+}
+
+header {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px 0;
+  background-color: whitesmoke;
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+header p {
+  font-size: 18px;
+  color: #666;
+}
+
+.txt {
+  width: 80%;
+  margin: 0 auto;
+  padding: 18px;
+  background-color: whitesmoke;
+}
+
+.article-list {
+  list-style: none;
+  padding: 0;
+}
+
+.article-list li {
+  margin-bottom: 20px;
+}
+
+time {
+  color: #777;
+  font-size: 0.9rem;
+}

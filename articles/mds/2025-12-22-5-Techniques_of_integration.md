@@ -1,44 +1,33 @@
----
-title: MIT18.01SC Techniques_of_integration
-date: 2025-12-22
-categories: notes
-tags: [math, calculus]
-math: true
-published: true
----
-
-*本文为笔者整理的[MIT18.01SC](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/)关于积分技巧的知识内容
+本文为笔者整理的[MIT18.01SC](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/)关于积分技巧的知识内容
 收录整理了课程中关于积分的一些基本技巧, 求解面积体积弧长等部分没有收入.*
 
----
 # Part A: Trigonometric Powers, Trigonometric Substitution and Com / 关于三角幂 三角代换
 
 ## 基本恒等变换公式
 
 下文中我们将用到
-1.  $$
+1. 
+    $$
     \sin^2x + \cos^2x = 1
     $$
-2. *half-angle identites* / 半角恒等式
-   
+
+2. half-angle identites* / 半角恒等式
     $$
     \sin(2x) = 2\sin(x)\cos(x)
     $$
-
     $$
     \cos(2x) = \cos^2(x) - \sin^2(x)
     $$
 
-    以及常用的两个变形
+以及常用的两个变形
 
-    $$
-    \cos^2x = \frac{1 + \cos(2x)}{2}
-    $$
+$$
+\cos^2x = \frac{1 + \cos(2x)}{2}
+$$
 
-    $$
-    \sin^2x = \frac{1 - \cos(2x)}{2}
-    $$
-
+$$
+\sin^2x = \frac{1 - \cos(2x)}{2}
+$$
 
 ## $\int\sin(x^n)\cos(x^m) \, dx$
 

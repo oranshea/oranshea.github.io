@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>2025-12-22-5-Techniques_of_integration</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<p>本文为笔者整理的<a
+href="https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/">MIT18.01SC</a>关于积分技巧的知识内容
+收录整理了课程中关于积分的一些基本技巧,
+求解面积体积弧长等部分没有收入.*</p>
+<h1
+id="part-a-trigonometric-powers-trigonometric-substitution-and-com-关于三角幂-三角代换">Part
+A: Trigonometric Powers, Trigonometric Substitution and Com / 关于三角幂
+三角代换</h1>
+<h2 id="基本恒等变换公式">基本恒等变换公式</h2>
+<p>下文中我们将用到 1. <span class="math display">\[
+    \sin^2x + \cos^2x = 1
+    \]</span></p>
+<ol start="2" type="1">
+<li>half-angle identites* / 半角恒等式 <span class="math display">\[
+\sin(2x) = 2\sin(x)\cos(x)
+\]</span> <span class="math display">\[
+\cos(2x) = \cos^2(x) - \sin^2(x)
+\]</span></li>
+</ol>
+<p>以及常用的两个变形</p>
+<p><span class="math display">\[
+\cos^2x = \frac{1 + \cos(2x)}{2}
+\]</span></p>
+<p><span class="math display">\[
+\sin^2x = \frac{1 - \cos(2x)}{2}
+\]</span></p>
+<h2 id="intsinxncosxm-dx"><span
+class="math inline">\(\int\sin(x^n)\cos(x^m) \, dx\)</span></h2>
+<p>关于这个积分, 分为两种情况: * easy case * harder case</p>
+<h3 id="easy-case">1. easy case</h3>
+<p>所谓easy case, 就是指数n, m至少有一个奇数.</p>
+<p>我们运用换元法(这里是凑微分法)和<span class="math inline">\(\sin^2(x)
++ \cos^2(x) = 1\)</span>进行恒等变化, 过程就会变得顺利.</p>
+<p>思考一下, 当我们把具有奇数指数的因式拆开并凑微分后, 指数变为偶数,
+很容易地根据恒等变化进行转换(转换为和微分算子一致), 从而换元.
+<del>轻松解决问题</del></p>
+<p>下面是一个例子(<em>摘自MIT18.01SC</em>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int \cos^3(2x) \, dx &amp;= \frac{1}{2} \int \cos^3(u) \, du \quad (u =
+2x) \\
+&amp;= \frac{1}{2} \int \cos^2(u) \cos(u) \, du \\
+&amp;= \frac{1}{2} \int (1 - \sin^2(u)) \cos(u) \, du \\
+&amp;= \frac{1}{2} \int (1 - v^2) \, dv \quad (v = \sin u) \\
+&amp;= \frac{1}{2} \left( v - \frac{1}{3} v^3 + c \right) \\
+&amp;= \frac{1}{2} \left( \sin(2x) - \frac{1}{3} \sin^3(2x) + c \right)
+\\
+\int \cos^3(2x) \, dx &amp;= \frac{1}{2} \sin(2x) - \frac{1}{6}
+\sin^3(2x) + C.
+\end{aligned}
+\]</span></p>
+<h3 id="hard-case">2. hard case</h3>
+<p>当指数n, m都为偶数, 问题更加难解决.</p>
+<p>无论我们怎么凑微分, 总存在奇数因式, 我们无法像easy case中运用<span
+class="math inline">\(\sin^2(x) + \cos^2(x) =
+1\)</span>将剩余的因数统一转换为包含微分算子的式子.</p>
+<p>因此我们使用 <span class="math display">\[
+\cos^2(x) = \frac{1 + \cos(2x)}{2}
+\]</span></p>
+<p><span class="math display">\[
+\sin^2(x) = \frac{1 - \cos(2x)}{2}
+\]</span></p>
+<p>来进行降幂操作</p>
+<p>如下例子(<em>摘自MIT18.01SC</em>):</p>
+<p><span class="math display">\[
+\int \sin^{4} x \cos^{2} x \, dx
+\]</span></p>
+<p>先进行降幂操作</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sin^{4} x \cos^{2} x &amp;= (\sin^{2} x)^{2} \cos^{2} x \\
+&amp;= \left( \frac{1 - \cos(2x)}{2} \right)^{2} \left( \frac{1 +
+\cos(2x)}{2} \right) \\
+&amp;= \left( \frac{1 - 2\cos(2x) + \cos^{2}(2x)}{4} \right) \left(
+\frac{1 + \cos(2x)}{2} \right) \\
+&amp;= \frac{1 - 2\cos(2x) + \cos^{2}(2x) + \cos(2x) - 2\cos^{2}(2x) +
+\cos^{3}(2x)}{8} \\
+&amp;= \frac{1 - \cos(2x) - \cos^{2}(2x) + \cos^{3}(2x)}{8}
+\end{aligned}
+\]</span></p>
+<p>带入恒等变化的结果</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int \sin^{4} x \cos^{2} x \, dx &amp;= \int \frac{1 - \cos(2x) -
+\cos^{2}(2x) + \cos^{3}(2x)}{8} \, dx \\
+\end{aligned}
+\]</span></p>
+<p>同样操作再对<span class="math inline">\(\cos^{2}(2x)\)</span>和<span
+class="math inline">\(\cos^{3}(2x)\)</span>进行降幂操作.
+这里给出结果:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int \cos^{2}(2x) \, dx &amp;= \frac{x}{2} + \frac{\sin(2x)}{4} + c_{1}
+\\
+\int \cos^{3}(2x) \, dx &amp;= \frac{1}{2} \sin(2x) - \frac{1}{6}
+\sin^{3}(2x) + c_{2}
+\end{aligned}
+\]</span></p>
+<p>直到每一项都是1次的, 积分变得简单.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int \sin^{4} x \cos^{2} x \, dx &amp;= \int \frac{1 - \cos(2x) -
+\cos^{2}(2x) + \cos^{3}(2x)}{8} \, dx \\
+&amp;= \frac{1}{8} \left[ x - \frac{1}{2} \sin(2x) - \left( \frac{x}{2}
++ \frac{\sin(2x)}{4} + c_1 \right) \right. \\
+&amp;\quad \left. + \left( \frac{1}{2} \sin(2x) - \frac{1}{6}
+\sin^{3}(2x) + c_2 \right) \right] \\
+&amp;= \frac{1}{8} \left[ \frac{x}{2} - \frac{\sin(2x)}{4} - \frac{1}{6}
+\sin^{3}(2x) \right] + C \\
+&amp;= \frac{x}{16} - \frac{\sin(2x)}{32} - \frac{\sin^{3}(2x)}{48} + C
+\end{aligned}
+\]</span></p>
+<h2 id="一些三角换元">一些三角换元</h2>
+<p>这部分相信各位已经都熟悉, 仅仅作出总结,
+下表列出了不同的三角代换方法及其用途：</p>
+<table>
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 34%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">如果积分式中包含 (If your integrand
+contains)</th>
+<th style="text-align: left;">进行代换 (Make substitution)</th>
+<th style="text-align: left;">得到结果 (To get)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(\sqrt{a^2 -
+x^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x = a \cos
+\theta\)</span> 或 <span class="math inline">\(x = a \sin
+\theta\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a \sin
+\theta\)</span> 或 <span class="math inline">\(a \cos
+\theta\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(\sqrt{a^2 +
+x^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x = a \tan
+\theta\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a \sec
+\theta\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(\sqrt{x^2 -
+a^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x = a \sec
+\theta\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a \tan
+\theta\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="配方法">配方法</h2>
+<p>对于被积函数包含了一个根号下的二项式, 我们通常选择进行配方.</p>
+<p>如<span class="math inline">\(\int\frac{1}{\sqrt{x^2 +
+4x}}\,dx\)</span>, 作如下转换:</p>
+<p><span class="math display">\[
+\int \frac{dx}{\sqrt{x^2 + 4x}} = \int \frac{dx}{\sqrt{(x + 2)^2 - 4}}
+\]</span></p>
+<p>配方过程我们可以使用对比系数法.</p>
+<p><span class="math display">\[
+x^2 + 4x = (x + a)^2 +  b = x^2 + 2ax + a^2 + c
+\]</span></p>
+<p>可得 <span class="math inline">\(a = 2, c = -4\)</span></p>
+<p>配方完我们就可以使用二中的三角换元表格来进行换元了.</p>
+<h1
+id="part-b-partial-fractions-integration-by-parts-arc-length-and-surface-area">Part
+B: Partial Fractions, Integration by Parts, Arc Length, and Surface
+Area</h1>
+<h2 id="partial-fractions">Partial Fractions</h2>
+<p>也就是将有理函数<span
+class="math inline">\(\frac{P(x)}{Q(x)}\)</span>拆分为几个简单的式子,
+然后对各个式子积分.如下.</p>
+<p><span class="math display">\[
+\int\frac{4x - 1}{x^2 + x - 2}\leftrightarrow \int(\frac{1}{x - 1} +
+\frac{3}{x +2}) \, dx
+\]</span></p>
+<h2 id="cover-up-method">Cover-up Method</h2>
+<p>Cover-up
+Method是一个将复杂的有理分式转换为部分分式的方法.在此举例说明.</p>
+<p>假设我们要分解：</p>
+<p><span class="math display">\[
+\frac{x+3}{(x-1)(x+2)} = \frac{A}{x-1} + \frac{B}{x+2}
+\]</span></p>
+<p><strong>第一步</strong>：求 <span class="math inline">\(A\)</span>
+(对应分母为 <span class="math inline">\(x-1\)</span>)遮住左边分母中的
+<span class="math inline">\((x-1)\)</span>。令 <span
+class="math inline">\(x-1 = 0 \Rightarrow \mathbf{x = 1}\)</span>。将
+<span class="math inline">\(x=1\)</span> 代入剩余部分：</p>
+<p><span class="math display">\[
+A = \left. \frac{x+3}{\square \cdot (x+2)} \right|_{x=1} =
+\frac{1+3}{1+2} = \frac{4}{3}
+\]</span></p>
+<p><strong>第二步</strong>：求 <span class="math inline">\(B\)</span>
+(对应分母为 <span class="math inline">\(x+2\)</span>)遮住左边分母中的
+<span class="math inline">\((x+2)\)</span>。令 <span
+class="math inline">\(x+2 = 0 \Rightarrow \mathbf{x = -2}\)</span>。将
+<span class="math inline">\(x=-2\)</span> 代入剩余部分：</p>
+<p><span class="math display">\[
+B = \left. \frac{x+3}{(x-1) \cdot \square} \right|_{x=-2} =
+\frac{-2+3}{-2-1} = \frac{1}{-3} = -\frac{1}{3}
+\]</span></p>
+<p><strong>结果</strong>：</p>
+<p><span class="math display">\[
+\frac{x+3}{(x-1)(x+2)} = \frac{4/3}{x-1} - \frac{1/3}{x+2}
+\]</span></p>
+<h3 id="适用范围与局限性">1.适用范围与局限性</h3>
+<p><strong>最适用</strong>: 分母全是互不相同的线性因子，如 <span
+class="math inline">\((x-a)(x-b)(x-c)\)</span>。</p>
+<p><strong>限制</strong>: 如果分母有重复因子（如 <span
+class="math inline">\((x-1)^2\)</span>），Cover-up
+只能求出<em>最高次幂的系数</em>。如果分母有不可约二次因式（如 <span
+class="math inline">\(x^2+1\)</span>），通常需要结合代入法或系数比较法。
+对比系数应该都比较熟悉, 这里不再赘述.</p>
+<h3 id="如何理解">2.如何理解</h3>
+<p>这是笔者本人思考</p>
+<p><span class="math display">\[
+\frac{x+3}{(x-1)(x+2)} = \frac{A}{x-1} + \frac{B}{x+2}
+\]</span></p>
+<p>对于上等式, 遮住<span class="math inline">\(x -
+1\)</span>实际就是两边同乘<span class="math inline">\(x - 1\)</span>,
+带入<span class="math inline">\(x = 1\)</span>自然就能得到A,
+同理也能解释为什么分母有重复因子只能求出其最高次幂的系数.</p>
+<p><span class="math display">\[
+\frac{x+3}{(x+2)} = \frac{A}{x-1}(x - 1) + \frac{B}{x+2}(x - 1)
+\]</span></p>
+<p>对于系数比较多的, 这种方法还是比较快的. <a
+href="/assets/pdf/Cover-Up_MIT18_01SCF10_Ses74c.pdf">点这里</a>查看原文介绍.</p>
+<p>对于因式分解, 这里介绍<a
+href="/assets/pdf/long_division_MIT18_01SCF10_Ses75c.pdf">长除法</a>,
+相信大家都已经会使用.</p>
+<p>对于Partial Fractions, <a
+href="/assets/pdf/partial_frac_big_example_MIT18_01SCF10_Ses75d.pdf">这里</a>有个总结.</p>
+<h2 id="integration-by-part-分部积分法">Integration by Part
+分部积分法</h2>
+<p>相信大家都会, 基本公式:</p>
+<p><span class="math display">\[
+\int u \,dv =  uv - \int v \,du
+\]</span></p>
+<p>通过分部积分我们能求得</p>
+<p><span class="math display">\[
+\int \ln x = x \ln x -  x + C
+\]</span></p>
+<h3 id="reduction-formula">Reduction Formula</h3>
+<p>那么<span class="math inline">\(\int \ln^n x \, dx\)</span>呢?</p>
+<p>通过分部积分我们可以得到</p>
+<p><span class="math display">\[
+\int \ln^n x \, dx= x \ln x - n\int (\ln x)^{n -1} \, dx
+\]</span></p>
+<p>可以写作<span class="math inline">\(F_n(x) = x \ln x -
+nF_{n-1}(x)\)</span>, 我们称为reduction .formula</p>
+<p>使用这个公式我们可以计算<span class="math inline">\(\int \ln^n x \,
+dx\)</span></p>
+<p>这里再介绍另外一个reduction formula</p>
+<p><span class="math display">\[
+\int x^n e^{ax} \, dx = \frac{1}{a} x^n e^{ax} - \frac{n}{a} \int
+x^{n-1} e^{ax} \, dx
+\]</span></p>
+<p>其实这些公式可以使用一次分部积分来现推, 不用花费功夫去记忆.</p>
+<p>(这里我推荐使用<a
+href="#表格分部积分法-tabular-integration-by-parts">表格积分法</a>,
+一种分部积分技巧, 下文为, 维基百科翻译内容,
+笔者<del>AI</del>翻译而来)</p>
+<h2 id="表格分部积分法-tabular-integration-by-parts">表格分部积分法
+(Tabular Integration by Parts)</h2>
+<p>表格法（Tabular
+Method）是分部积分公式的简化形式，能够将复杂的重复积分过程总结在一个表格中。该方法因
+1988 年的电影《立志凌云》（<em>Stand and Deliver</em>）而广为人知。</p>
+<hr />
+<h3 id="基本原理">1. 基本原理</h3>
+<p>对于积分 <span class="math inline">\(\int u \cdot v \,
+dx\)</span>，我们通过不断对 <span class="math inline">\(u\)</span>
+求导，对 <span class="math inline">\(v\)</span> 积分来构造表格。</p>
+<p><strong>示例 1：幂函数与三角函数组合 </strong> 计算积分：</p>
+<p><span class="math display">\[
+\int x^3 \cos x \, dx
+\]</span></p>
+<p><strong>步骤说明：</strong> * 令 <span class="math inline">\(u^{(0)}
+= x^3\)</span>（作为要求导的部分）。 * 令 <span
+class="math inline">\(v^{(n)} = \cos
+x\)</span>（作为要积分的部分）。</p>
+<p><strong>构造表格：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><span
+class="math inline">\(i\)</span></th>
+<th style="text-align: left;">符号 (Sign)</th>
+<th style="text-align: left;">A: 导数 <span
+class="math inline">\(u^{(i)}\)</span></th>
+<th style="text-align: left;">B: 积分 <span
+class="math inline">\(v^{(n-i)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;"><span
+class="math inline">\(x^3\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\cos
+x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">−</td>
+<td style="text-align: left;"><span
+class="math inline">\(3x^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sin
+x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;"><span
+class="math inline">\(6x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-\cos
+x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">−</td>
+<td style="text-align: left;"><span
+class="math inline">\(6\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-\sin
+x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\cos
+x\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结果组合：</strong> 将第 <span
+class="math inline">\(j\)</span> 行的 A 项与第 <span
+class="math inline">\(j+1\)</span> 行的 B 项相乘，并应用对应的符号。</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int x^3 \cos x \, dx &amp;= (+1)(x^3)(\sin x) + (-1)(3x^2)(-\cos x) \\
+&amp;\quad + (+1)(6x)(-\sin x) + (-1)(6)(-\cos x) + C \\
+&amp;= x^3 \sin x + 3x^2 \cos x - 6x \sin x - 6\cos x + C
+\end{aligned}
+\]</span></p>
+<hr />
+<h3 id="特殊情况循环积分-recurring-integrals">2. 特殊情况：循环积分
+(Recurring Integrals)</h3>
+<p>当导数项不会变成
+0，但导数与积分的乘积出现了原始被积函数的倍数时，可以停止计算。这种情况常见于指数函数与三角函数的乘积。</p>
+<p><strong>示例 2：指数函数与三角函数 </strong> 计算积分：</p>
+<p><span class="math display">\[
+\int e^x \cos x \, dx
+\]</span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><span
+class="math inline">\(i\)</span></th>
+<th style="text-align: left;">符号 (Sign)</th>
+<th style="text-align: left;">A: 导数 <span
+class="math inline">\(u^{(i)}\)</span></th>
+<th style="text-align: left;">B: 积分 <span
+class="math inline">\(v^{(n-i)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;"><span
+class="math inline">\(e^x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\cos
+x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">−</td>
+<td style="text-align: left;"><span
+class="math inline">\(e^x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sin
+x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;"><span
+class="math inline">\(e^x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-\cos
+x\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>观察：</strong> 第 <span class="math inline">\(i=2\)</span>
+行的 <span class="math inline">\(A \times B\)</span> 乘积（考虑符号）为
+<span class="math inline">\(\int e^x (-\cos x)
+dx\)</span>，这正是原始被积函数的负数。</p>
+<p><strong>推导过程：</strong></p>
+<p><span class="math display">\[
+\int e^x \cos x \, dx = \underbrace{(+1)(e^x)(\sin x)}_{j=0} +
+\underbrace{(-1)(e^x)(-\cos x)}_{j=1} + \int \underbrace{(+1)(e^x)(-\cos
+x)}_{i=2} \, dx
+\]</span></p>
+<p><strong>整理得：</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\int e^x \cos x \, dx &amp;= e^x \sin x + e^x \cos x - \int e^x \cos x
+\, dx \\
+2 \int e^x \cos x \, dx &amp;= e^x (\sin x + \cos x) + C&#39; \\
+\int e^x \cos x \, dx &amp;= \frac{1}{2} e^x (\sin x + \cos x) + C
+\end{aligned}
+\]</span></p>
+<hr />
+<h3 id="记忆要点">3. 记忆要点</h3>
+<ul>
+<li><strong>A 列选择：</strong> 选容易求导至 0
+的项（通常是多项式）。</li>
+<li><strong>B 列选择：</strong> 选容易积分且不会消失的项。</li>
+<li><strong>连线规则：</strong> 始终是“左上”连“右下”进行乘积。</li>
+<li><strong>水平行：</strong> 如果在某一行停止（未到
+0），该行的水平乘积必须放在积分号 <span
+class="math inline">\(\int\)</span> 内。</li>
+</ul>
+<hr />
+<p><em>Part B余下内容 以及 Part C内容, 课程中为求面积体积弧长,
+以及极坐标和参数方程, 不再收录</em></p>
+</body>
+</html>
