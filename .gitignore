@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Emacs
+*~
+\#*\#
+.#*
+
+# Temporary files
+*.tmp
+*.log
+
+# Markdown source files (optional)
+mds/
+*.md
